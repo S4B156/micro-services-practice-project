@@ -26,3 +26,8 @@ spring:
               # Если запрос пришел на /api/hello/...
               predicates:
                 - Path=/api/hello/**
+
+            - id: user-service-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**

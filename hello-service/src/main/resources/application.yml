@@ -14,10 +14,3 @@ spring:
         health-check-path: /actuator/health
         health-check-interval: 10s
         prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - "health"
