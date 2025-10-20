@@ -1,0 +1,11 @@
+# Общие настройки для всех
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # Включаем трассировку Zipkin/Micrometer (полезно для отладки)
+
+  # Открываем эндпоинт "config" для отладки, чтобы видеть, какой конфиг применился
+  endpoints:
+    web:
+      exposure:
+        include: "health,config"

@@ -1,0 +1,28 @@
+server:
+  port: 8080 # Шлюз будет слушать на порту 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          # Включаем роутинг на основе Service Discovery
+          discovery:
+            locator:
+              enabled: false # Разрешает Gateway искать сервисы в Consul
+              lower-case-service-id: true # Приводит имена сервисов к нижнему регистру (удобно)
+
+          # --- Явная настройка роутинга (более безопасный подход) ---
+          routes:
+            - id: hello-service-route # Уникальный ID роута
+
+              # "uri: lb://hello-service"
+              # "lb" означает Load Balancer.
+              # Gateway запросит у Consul: "Где находится 'hello-service'?"
+              # и будет балансировать нагрузку, если их несколько.
+              uri: lb://hello-service
+
+              # "predicates" - Условия
+              # Если запрос пришел на /api/hello/...
+              predicates:
+                - Path=/api/hello/**
