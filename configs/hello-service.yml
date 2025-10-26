@@ -1,2 +1,0 @@
-server:
-  port: ${USER_SERVICE_PORT:0}
