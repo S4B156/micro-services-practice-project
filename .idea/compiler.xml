@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-service" />
+        <module name="ingest-service" />
         <module name="gateway-service" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="config-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="hello-service" options="-parameters" />
+      <module name="ingest-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
