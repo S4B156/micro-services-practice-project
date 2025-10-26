@@ -17,6 +17,7 @@ public class HelloController {
     public String sayHello(){
         return "Hello from hello-service! (via Gateway & Consul)";
     }
+
     @GetMapping("/users")
     public String sayHelloUsers(){
         StringBuilder str = new StringBuilder();

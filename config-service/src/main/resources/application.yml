@@ -11,10 +11,10 @@ spring:
     config:
       server:
         native:
-          search-locations: file:./configs
+          search-locations: file:${CONFIG_LOCATION:./configs}
 
     consul:
-      host: localhost
+      host: ${CONSUL_HOST:localhost}
       port: 8500
       discovery:
         service-name: ${spring.application.name}
@@ -28,4 +28,3 @@ management:
       exposure:
         include:
           - "health"
-

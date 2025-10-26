@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY .mvn .mvn
 COPY mvnw .
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw dependency:go-offline -B
 
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
@@ -15,5 +15,7 @@ FROM openjdk:21-slim
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8082
 
 CMD ["java", "-jar", "app.jar"]

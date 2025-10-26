@@ -3,11 +3,11 @@ spring:
     name: user-service
 
   config:
-    import: "configserver:http://localhost:8888"
+    import: "configserver:http://${CONFIG_SERVER_HOST:localhost}:8888"
 
   cloud:
     consul:
-      host: localhost
+      host: ${CONSUL_HOST:localhost}
       port: 8500
       discovery:
         service-name: ${spring.application.name}
