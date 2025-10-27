@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL:localhost}:5432/ingest-service-db
-    username: ${DATASOURCE_USERNAME:postgres_user}
-    password: ${DATASOURCE_PASSWORD:postgres_password}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true

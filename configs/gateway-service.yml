@@ -25,4 +25,4 @@ spring:
               # "predicates" - Условия
               # Если запрос пришел на /api/hello/...
               predicates:
-                - Path=/api/data/**
+                - Path=/api/document/**

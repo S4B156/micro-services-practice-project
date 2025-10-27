@@ -1,26 +1,27 @@
 package com.pet.ingest_service.controller;
 
-import com.pet.ingest_service.service.DataService;
+import com.pet.ingest_service.service.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/data")
+@RequestMapping("/api/document")
 @RequiredArgsConstructor
 public class SaveController {
-    private final DataService dataService;
+    private final DocumentService dataService;
 
     @GetMapping
-    public String allData(){
-        List<String> data = dataService.getAllData();
-        return data.isEmpty() ? "None" : data.toString();
+    public String getAllDocuments(){
+        // TODO: return all the documents that were uploaded
+        return "";
     }
 
-    @PostMapping("/save/{data}")
-    public String saveData(@PathVariable String data) {
-        dataService.saveNewData(data);
-        return "redirect:/api/data";
+    @PostMapping("/save")
+    public String saveDocument(@RequestParam MultipartFile multipartFile) {
+        // TODO: save logic document
+        return "";
     }
 }
