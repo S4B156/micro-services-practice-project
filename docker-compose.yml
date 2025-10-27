@@ -1,9 +1,12 @@
 networks:
   microservices-net:
     driver: bridge
+  ingest-service-net:
+    driver: bridge
 
 volumes:
   consul_data:
+  postgres_data:
 
 services:
   consul:
@@ -23,6 +26,27 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  postgresql:
+    image: postgres:16-alpine
+    container_name: postgresql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: ingest-service-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      ingest-service-net:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres_user -d ingest-service-db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
   config-service:
     build: ./config-service
@@ -49,10 +73,17 @@ services:
       - CONSUL_HOST=consul
       - CONFIG_SERVER_HOST=config-service
       - INGEST_SERVICE_PORT=8080
+      - DATASOURCE_URL=postgresql
+      - DATASOURCE_USERNAME=postgres_user
+      - DATASOURCE_PASSWORD=postgres_password
     depends_on:
-      - config-service
+      postgresql:
+        condition: service_healthy
+      config-service:
+        condition: service_started
     networks:
       - microservices-net
+      - ingest-service-net
 
   gateway-service:
     build: ./gateway-service
@@ -60,6 +91,8 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
+    depends_on:
+      - ingest-service
     environment:
       - CONSUL_HOST=consul
       - CONFIG_SERVER_HOST=config-service
