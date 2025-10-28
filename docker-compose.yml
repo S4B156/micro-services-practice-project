@@ -76,6 +76,11 @@ services:
       - DATASOURCE_URL=postgresql
       - DATASOURCE_USERNAME=postgres_user
       - DATASOURCE_PASSWORD=postgres_password
+
+      - cloud.aws.bucket.name=${S3_BUCKET_NAME}
+      - cloud.aws.credentials.access-key=${S3_ACCESS_KEY}
+      - cloud.aws.credentials.secret-key=${S3_SECRET_KEY}
+      - cloud.aws.region.static=${AWS_REGION}
     depends_on:
       postgresql:
         condition: service_healthy

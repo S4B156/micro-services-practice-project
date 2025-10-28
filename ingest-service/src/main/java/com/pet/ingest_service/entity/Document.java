@@ -17,6 +17,9 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    String fileName;
+    String extension;
+
     @Column(name = "document_key")
     String key;
 

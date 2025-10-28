@@ -2,6 +2,11 @@ server:
   port: ${INGEST_SERVICE_PORT:0}
 
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL:localhost}:5432/ingest-service-db
     username: ${DATASOURCE_USERNAME:postgres}
@@ -11,3 +16,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+cloud:
+  aws:
+    bucket:
+      name: ${S3_BUCKET_NAME}
+    credentials:
+      access-key: ${S3_ACCESS_KEY}
+      secret-key: ${S3_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
