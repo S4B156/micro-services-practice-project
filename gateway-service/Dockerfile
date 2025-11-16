@@ -10,7 +10,7 @@ RUN ./mvnw dependency:go-offline -B
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:21-slim
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 

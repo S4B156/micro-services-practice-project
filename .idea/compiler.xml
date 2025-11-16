@@ -10,7 +10,7 @@
         <module name="gateway-service" />
         <module name="config-service" />
       </profile>
-      <profile name="Annotation profile for ingest-service" enabled="true">
+      <profile name="Annotation profile for ocr-nlp-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -18,6 +18,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
         <module name="ingest-service" />
+        <module name="ocr-nlp-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +32,7 @@
       <module name="gateway-service" options="-parameters" />
       <module name="hello-service" options="-parameters" />
       <module name="ingest-service" options="-parameters" />
+      <module name="ocr-nlp-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

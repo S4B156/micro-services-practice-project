@@ -15,14 +15,19 @@ spring:
           # --- Явная настройка роутинга (более безопасный подход) ---
           routes:
             - id: ingest-service-route # Уникальный ID роута
-
               # "uri: lb://hello-service"
               # "lb" означает Load Balancer.
               # Gateway запросит у Consul: "Где находится 'hello-service'?"
               # и будет балансировать нагрузку, если их несколько.
               uri: lb://ingest-service
-
               # "predicates" - Условия
               # Если запрос пришел на /api/hello/...
               predicates:
                 - Path=/api/document/**
+
+#            - id: ocr-nlp-service-route
+#              uri: lb://ocr-nlp-service
+#              predicates:
+#                - Path=/api/ocr-nlp/**
+#              filters:
+#                - StripPrefix=1

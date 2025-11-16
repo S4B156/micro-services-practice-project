@@ -1,0 +1,10 @@
+server:
+  port: ${OCR_NLP_SERVICE_PORT:0}
+
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:user}
+    password: ${RABBITMQ_PASSWORD:password}
+    queue: ${RABBITMQ_QUEUE_NAME:FirstQueue}

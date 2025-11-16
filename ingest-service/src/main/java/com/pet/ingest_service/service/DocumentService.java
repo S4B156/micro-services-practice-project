@@ -1,6 +1,7 @@
 package com.pet.ingest_service.service;
 
 import com.pet.ingest_service.HashGenerator;
+import com.pet.ingest_service.config.RabbitConfig;
 import com.pet.ingest_service.entity.Document;
 import com.pet.ingest_service.repository.DocumentRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class DocumentService {
     private final DocumentRepository documentRepository;
     private final S3Service s3Service;
     private final HashGenerator hashGenerator;
+    private final MessageSender messageSender;
 
     public void saveDocument(MultipartFile multipartFile){
         String key = s3Service.uploadFile(multipartFile);
@@ -26,7 +28,9 @@ public class DocumentService {
         document.setKey(key);
         document.setHashKey(hashKey);
 
+        // RabbitMQ logic
         documentRepository.save(document);
+        messageSender.sendMessage("Send a document data");
     }
 
     public List<String> getAllFiles(){

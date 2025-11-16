@@ -12,5 +12,9 @@ spring:
       discovery:
         service-name: ${spring.application.name}
         health-check-path: /actuator/health
-        health-check-interval: 10s
-        prefer-ip-address: true
+        health-check-interval: 15s
+        health-check-timeout: 5s
+        health-check-critical-timeout: 30s
+        prefer-ip-address: false
+        hostname: ingest-service
+        register: true
